@@ -1,0 +1,2095 @@
+SQL> SET AUTOCOMMIT ON
+SQL> CREATE TABLE CUSTOMER_ORDER_DETAILS
+  2  ( CID NUMBER(4),
+  3   CNAME VARCHAR2(50),
+  4   WID NUMBER(3),
+  5  PRIMARY KEY(CID));
+
+Table created.
+
+SQL> CREATE TABLE CUSTOMER_ITEM_DETAILS
+  2  ( CID NUMBER(4),
+  3   ITEMNAME VARCHAR2(50) NOT NULL,
+  4   QUANTITY INT ,
+  5  PRIMARY KEY(CID));
+
+Table created.
+
+SQL> CREATE TABLE WAITER_ORDER_DETAILS
+  2  ( WID NUMBER(3),
+  3    WNAME VARCHAR2(50),
+  4    OID NUMBER(2),
+  5    CID NUMBER(4),
+  6   PRIMARY KEY(WID),
+  7  FOREIGN KEY(CID) REFERENCES CUSTOMER_ORDER_DETAILS);
+
+Table created.
+
+SQL> CREATE TABLE CHEF_ORDER_DETAILS
+  2  (
+  3     CHID NUMBER(1),
+  4     CHNAME VARCHAR2(50),
+  5     WID NUMBER(3),
+  6     OID NUMBER(2),
+  7     PRIMARY KEY(CHID),
+  8     FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS);
+
+Table created.
+
+SQL> CREATE TABLE ORDER_DETAILS
+  2  ( OID NUMBER(2),
+  3    TNO NUMBER(1) NOT NULL,
+  4     CID NUMBER(4),
+  5     WID NUMBER(3),
+  6  PRIMARY KEY(OID),
+  7  FOREIGN KEY(CID) REFERENCES CUSTOMER_ORDER_DETAILS,
+  8  FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS);
+
+Table created.
+
+SQL> CREATE TABLE ITEM_DETAILS
+  2  (  ID INT UNIQUE,
+  3    ITEMNAME VARCHAR2(50),
+  4    COST FLOAT,
+  5   PRIMARY KEY(ITEMNAME));
+
+Table created.
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS ADD FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS;
+
+Table altered.
+
+SQL> ALTER TABLE WAITER_ORDER_DETAILS ADD FOREIGN KEY(OID) REFERENCES ORDER_DETAILS;
+
+Table altered.
+
+SQL> ALTER TABLE CHEF_ORDER_DETAILS ADD FOREIGN KEY(OID) REFERENCES ORDER_DETAILS;
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+
+
+
+
+
+SQL> DESC CUSTOMER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ CNAME                                              VARCHAR2(50)
+ WID                                                NUMBER(3)
+
+SQL> DESC CUSTOMER_ITEM_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ ITEMNAME                                  NOT NULL VARCHAR2(50)
+ QUANTITY                                           NUMBER(38)
+
+SQL> DESC WAITER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WID                                       NOT NULL NUMBER(3)
+ WNAME                                              VARCHAR2(50)
+ OID                                                NUMBER(2)
+ CID                                                NUMBER(4)
+
+SQL> DESC CHEF_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CHID                                      NOT NULL NUMBER(1)
+ CHNAME                                             VARCHAR2(50)
+ WID                                                NUMBER(3)
+ OID                                                NUMBER(2)
+
+SQL> DESC ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OID                                       NOT NULL NUMBER(2)
+ TNO                                       NOT NULL NUMBER(1)
+ CID                                                NUMBER(4)
+ WID                                                NUMBER(3)
+
+SQL> DESC ITEM_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER(38)
+ ITEMNAME                                  NOT NULL VARCHAR2(50)
+ COST                                               FLOAT(126)
+
+SQL>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Dec 31 17:59:48 2023
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> CREATE TABLE CUSTOMER_ORDER_DETAILS
+  2  ( CID NUMBER(4),
+  3    CNAME VARCHAR2(50),
+  4    WID NUMBER(3),
+  5    PRIMARY KEY(CID),
+  6
+SQL>
+SQL> SET AUTOCOMMIT ON
+SQL> CREATE TABLE CUSTOMER_ORDER_DETAILS
+  2  ( CID NUMBER(4),
+  3   CNAME VARCHAR2(50),
+  4   WID NUMBER(3),
+  5  PRIMARY KEY(CID));
+
+Table created.
+
+SQL> CREATE TABLE CUSTOMER_ITEM_DETAILS
+  2  ( CID NUMBER(4),
+  3   ITEMNAME VARCHAR2(50) NOT NULL,
+  4   QUANTITY INT ,
+  5  PRIMARY KEY(CID));
+
+Table created.
+
+SQL> CREATE TABLE WAITER_ORDER_DETAILS
+  2  ( WID NUMBER(3),
+  3    WNAME VARCHAR2(50),
+  4    OID NUMBER(2),
+  5    CID NUMBER(4),
+  6   PRIMARY KEY(WID),
+  7  FOREIGN KEY(CID) REFERENCES CUSTOMER_ORDER_DETAILS);
+
+Table created.
+
+SQL> CREATE TABLE CHEF_ORDER_DETAILS
+  2  (
+  3     CHID NUMBER(1),
+  4     CHNAME VARCHAR2(50),
+  5     WID NUMBER(3),
+  6     OID NUMBER(2),
+  7     PRIMARY KEY(CHID),
+  8     FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS);
+
+Table created.
+
+SQL> CREATE TABLE ORDER_DETAILS
+  2  ( OID NUMBER(2),
+  3    TNO NUMBER(1) NOT NULL,
+  4     CID NUMBER(4),
+  5     WID NUMBER(3),
+  6  PRIMARY KEY(OID),
+  7  FOREIGN KEY(CID) REFERENCES CUSTOMER_ORDER_DETAILS,
+  8  FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS);
+
+Table created.
+
+
+
+SQL> CREATE TABLE ITEM_DETAILS
+  2  (  ID INT UNIQUE,
+  3    ITEMNAME VARCHAR2(50),
+  4    COST FLOAT,
+  5   PRIMARY KEY(ITEMNAME));
+
+Table created.
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS ADD FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS;
+
+Table altered.
+
+SQL> ALTER TABLE WAITER_ORDER_DETAILS ADD FOREIGN KEY(OID) REFERENCES ORDER_DETAILS;
+
+Table altered.
+
+SQL> ALTER TABLE CHEF_ORDER_DETAILS ADD FOREIGN KEY(OID) REFERENCES ORDER_DETAILS;
+
+Table altered.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DESC CUSTOMER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ CNAME                                              VARCHAR2(50)
+ WID                                                NUMBER(3)
+
+SQL> DESC CUSTOMER_ITEM_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ ITEMNAME                                  NOT NULL VARCHAR2(50)
+ QUANTITY                                           NUMBER(38)
+
+SQL> DESC WAITER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WID                                       NOT NULL NUMBER(3)
+ WNAME                                              VARCHAR2(50)
+ OID                                                NUMBER(2)
+ CID                                                NUMBER(4)
+
+SQL> DESC CHEF_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CHID                                      NOT NULL NUMBER(1)
+ CHNAME                                             VARCHAR2(50)
+ WID                                                NUMBER(3)
+ OID                                                NUMBER(2)
+
+SQL> DESC ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OID                                       NOT NULL NUMBER(2)
+ TNO                                       NOT NULL NUMBER(1)
+ CID                                                NUMBER(4)
+ WID                                                NUMBER(3)
+
+SQL> DESC ITEM_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER(38)
+ ITEMNAME                                  NOT NULL VARCHAR2(50)
+ COST                                               FLOAT(126)
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS ADD FOREIGN KEY(CID) REFERENCES CUSTOMER_ORDER_DETAILS;
+
+Table altered.
+
+SQL> INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2001,'ARUN',101);
+INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2001,'ARUN',101)
+*
+ERROR at line 1:
+ORA-02291: integrity constraint (SYSTEM.SYS_C007491) violated - parent key not
+found
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DEATILS DROP CONSTRAINT FOREIGN KEY;
+ALTER TABLE CUSTOMER_ORDER_DEATILS DROP CONSTRAINT FOREIGN KEY
+                                                           *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DEATILS DROP CONSTRAINT WID;
+ALTER TABLE CUSTOMER_ORDER_DEATILS DROP CONSTRAINT WID
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DEATILS DROP CONSTRAINT FOREIGN KEY(WID);
+ALTER TABLE CUSTOMER_ORDER_DEATILS DROP CONSTRAINT FOREIGN KEY(WID)
+                                                           *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FOREIGN KEY(WID);
+ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FOREIGN KEY(WID)
+                                                           *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FOREIGN KEY;
+ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FOREIGN KEY
+                                                           *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT WID;
+ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT WID
+                                                   *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2001,'ARUN',NULL);
+
+1 row created.
+
+Commit complete.
+SQL> DROP ITEM_DETAILS;
+DROP ITEM_DETAILS
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> DROP TABLE ITEM_DETAILS;
+
+Table dropped.
+
+SQL>  DROP TABLE  DROP TABLE;
+ DROP TABLE  DROP TABLE
+             *
+ERROR at line 1:
+ORA-00903: invalid table name
+
+
+SQL>  DROP TABLE  ORDER_DETAILS;
+ DROP TABLE  ORDER_DETAILS
+             *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+SQL> DROP TABLE CHEF_ORDER_DETAILS;
+
+Table dropped.
+
+SQL> DROP CUSTOMER_ITEM_DETAILS;
+DROP CUSTOMER_ITEM_DETAILS
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option
+
+
+SQL> DROP TABLE CUSTOMER_ITEM_DETAILS;
+
+Table dropped.
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT WID;
+ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT WID
+                                                   *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS(WID);
+ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FOREIGN KEY(WID) REFERENCES WAITER_ORDER_DETAILS(WID)
+                                                           *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FK_WAITER_ORDER_DETAILS;
+ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FK_WAITER_ORDER_DETAILS
+                                                   *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FK_WID;
+ALTER TABLE CUSTOMER_ORDER_DETAILS DROP CONSTRAINT FK_WID
+                                                   *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint
+
+
+SQL> ALTER TABLE CUSTOMER_ORDER_DETAILS DROP COLUMN WID;
+
+Table altered.
+
+SQL> DESC CUSTOMER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ CNAME                                              VARCHAR2(50)
+
+SQL> ALTER TABLE WAITER_ORDER_TABLE DROP COLUMN OID;
+ALTER TABLE WAITER_ORDER_TABLE DROP COLUMN OID
+*
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> ALTER TABLE WAITER_ORDER_DETAILS DROP COLUMN OID;
+
+Table altered.
+
+SQL> ALTER TABLE WAITER_ORDER_DETAILS DROP COLUMN CID;
+
+Table altered.
+
+SQL> ALTER TABLE ORDER_DETAILS DROP COLUMN CID;
+
+Table altered.
+
+SQL> ALTER TABLE ORDER_DETAILS DROP COLUMN WID;
+
+Table altered.
+
+SQL> DROP TABLE ORDER_DETAILS;
+
+Table dropped.
+
+SQL> DROP TABLE CUSTOMER_ORDER_DETAILS;
+
+Table dropped.
+
+SQL> DROP TABLE WAITER_ORDER_DETAILS;
+
+Table dropped.
+
+SQL> CREATE TABLE CUSTOMER_ORDER_DETAILS
+  2     ( CID NUMBER(4),
+  3     CNAME VARCHAR2(50),
+  4      WID NUMBER(3),
+  5    PRIMARY KEY(CID));
+
+Table created.
+
+SQL> CREATE TABLE CUSTOMER_ITEM_DETAILS
+  2     ( CID NUMBER(4),
+  3      ITEMNAME VARCHAR2(50) NOT NULL,
+  4      QUANTITY INT ,
+  5     PRIMARY KEY(CID));
+
+Table created.
+
+SQL>  CREATE TABLE WAITER_ORDER_DETAILS
+  2    ( WID NUMBER(3),
+  3     WNAME VARCHAR2(50),
+  4      OID NUMBER(2),
+  5      CID NUMBER(4),
+  6      PRIMARY KEY(WID)
+  7    );
+
+Table created.
+
+SQL> CREATE TABLE CHEF_ORDER_DETAILS
+  2    (
+  3        CHID NUMBER(1),
+  4        CHNAME VARCHAR2(50),
+  5       WID NUMBER(3),
+  6        OID NUMBER(2),
+  7        PRIMARY KEY(CHID));
+
+Table created.
+
+SQL> SQL> CREATE TABLE ORDER_DETAILS
+SP2-0734: unknown command beginning "SQL> CREAT..." - rest of line ignored.
+SQL>   2  ( OID NUMBER(2),
+SQL>   3    TNO NUMBER(1) NOT NULL,
+SQL>        DO DATE,
+SP2-0042: unknown command "DO DATE," - rest of line ignored.
+SQL> PRIMARY KEY(OID
+SP2-0734: unknown command beginning "PRIMARY KE..." - rest of line ignored.
+SQL> ));
+SP2-0042: unknown command "))" - rest of line ignored.
+SP2-0044: For a list of known commands enter HELP
+and to leave enter EXIT.
+SQL> CREATE TABLE ORDER_DETAILS
+  2     ( OID NUMBER(2),
+  3       TNO NUMBER(1) NOT NULL,
+  4         DO DATE,
+  5  PRIMARY KEY(OID
+  6  ));
+
+Table created.
+
+SQL> CREATE TABLE ITEM_DETAILS
+  2     (  ID INT UNIQUE,
+  3        ITEMNAME VARCHAR2(50),
+  4       COST FLOAT,
+  5       PRIMARY KEY(ITEMNAME));
+
+Table created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID);
+Enter value for cid: 2001
+Enter value for cname: ARUN
+Enter value for wid: 101
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2001,'ARUN ',101)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2002
+Enter value for cname: PUSHPA
+Enter value for wid: 102
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2002,'PUSHPA',102)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2003
+Enter value for cname: VIVEK
+Enter value for wid: 103
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2003,'VIVEK',103)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2004
+Enter value for cname: SHAILA
+Enter value for wid: 104
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2004,'SHAILA',104)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2005
+Enter value for cname: BABU
+Enter value for wid: 105
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2005,'BABU',105)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2006
+Enter value for cname: CHAYA
+Enter value for wid: 102
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2006,'CHAYA',102)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2007
+Enter value for cname: LAKAN
+Enter value for wid: 105
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2007,'LAKAN',105)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2008
+Enter value for cname: AMEY
+Enter value for wid: 102
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2008,'AMEY',102)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2009
+Enter value for cname: SHRUTI
+Enter value for wid: 101
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2009,'SHRUTI',101)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2010
+Enter value for cname: PANKAJ
+Enter value for wid: 104
+old   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(&CID,'&CNAME',&WID)
+new   1: INSERT INTO CUSTOMER_ORDER_DETAILS VALUES(2010,'PANKAJ',104)
+
+1 row created.
+
+Commit complete.
+SQL> SELECT *FROM CUSTOMER_ORDER_DETAILS;
+
+       CID CNAME                                                     WID
+---------- -------------------------------------------------- ----------
+      2001 ARUN                                                      101
+      2002 PUSHPA                                                    102
+      2003 VIVEK                                                     103
+      2004 SHAILA                                                    104
+      2005 BABU                                                      105
+      2006 CHAYA                                                     102
+      2007 LAKAN                                                     105
+      2008 AMEY                                                      102
+      2009 SHRUTI                                                    101
+      2010 PANKAJ                                                    104
+
+10 rows selected.
+
+SQL> ALTER TABLE CUSTOMER_ITEM_DETAILS RENAME COLUMN ITEMNAME TO DISHNAME;
+
+Table altered.
+
+SQL> ALTER TABLE ITEM_DETAILS RENAME COLUMN ITEMNAME TO DISHNAME;
+
+Table altered.
+
+SQL> INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST);
+Enter value for id: 1
+Enter value for dishname: CHICKEN BIRYANI
+Enter value for cost: 210
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(1,'CHICKEN BIRYANI',210)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 2
+Enter value for dishname: MUTTON BIRYANI
+Enter value for cost: 253
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(2,'MUTTON BIRYANI',253)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 3
+Enter value for dishname: CHICKEN FAMILY PACK
+Enter value for cost: 552
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(3,'CHICKEN FAMILY PACK',552)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 4
+Enter value for dishname: MUTTON FAMILY PACK
+Enter value for cost: 576
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(4,'MUTTON FAMILY PACK',576)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 5
+Enter value for dishname: SPECIAL CHICKEN BIRYANI
+Enter value for cost: 337
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(5,'SPECIAL CHICKEN BIRYANI',337)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 6
+Enter value for dishname: SPECIAL MUTTON BIRYANI
+Enter value for cost: 351
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(6,'SPECIAL MUTTON BIRYANI',351)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 7
+Enter value for dishname: SUPREME CHICKEN BIRYANI
+Enter value for cost: 784
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(7,'SUPREME CHICKEN BIRYANI',784)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 8
+Enter value for dishname: SUPREME MUTTON BIRYANI
+Enter value for cost: 819
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(8,'SUPREME MUTTON BIRYANI',819)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 9
+Enter value for dishname: EGG BIRYANI
+Enter value for cost: 154
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(9,'EGG BIRYANI',154)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: VEG BIRYANI
+Enter value for dishname:
+Enter value for cost:
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(VEG BIRYANI,'',)
+INSERT INTO ITEM_DETAILS VALUES(VEG BIRYANI,'',)
+                                    *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> /
+Enter value for id: 10
+Enter value for dishname: VEG BIRYANI
+Enter value for cost: 154
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(10,'VEG BIRYANI',154)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 11
+Enter value for dishname: MUTTON THALI
+Enter value for cost: 355
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(11,'MUTTON THALI',355)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 12
+Enter value for dishname: CHICKEN THALI
+Enter value for cost: 283
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(12,'CHICKEN THALI',283)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 13
+Enter value for dishname: VEG TAHLI
+Enter value for cost: 212
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(13,'VEG TAHLI',212)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 14
+Enter value for dishname: VEG FAMILY PACK
+Enter value for cost: 383
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(14,'VEG FAMILY PACK',383)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 15
+Enter value for dishname: VEG SUPREME PACK
+Enter value for cost: 574
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(15,'VEG SUPREME PACK',574)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 16
+Enter value for dishname: CHILLY CHICKEN
+Enter value for cost: 264
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(16,'CHILLY CHICKEN',264)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: CHICKEN 65
+Enter value for dishname: 264
+Enter value for cost:
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(CHICKEN 65,'264',)
+INSERT INTO ITEM_DETAILS VALUES(CHICKEN 65,'264',)
+                                        *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> /
+Enter value for id: 17
+Enter value for dishname: CHICKEN 65
+Enter value for cost: 264
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(17,'CHICKEN 65',264)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 18
+Enter value for dishname: PEPPER CHICKEN
+Enter value for cost: 264
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(18,'PEPPER CHICKEN',264)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: PANEER 65
+Enter value for dishname:
+Enter value for cost:
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(PANEER 65,'',)
+INSERT INTO ITEM_DETAILS VALUES(PANEER 65,'',)
+                                       *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> /
+Enter value for id: 19
+Enter value for dishname: PANNER 65
+Enter value for cost: 196
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(19,'PANNER 65',196)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 20
+Enter value for dishname: VEG MANCHURIAN
+Enter value for cost: 189
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(20,'VEG MANCHURIAN ',189)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 21
+Enter value for dishname: CHICKEN TIKKA KEBAB
+Enter value for cost: 243
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(21,'CHICKEN TIKKA KEBAB',243)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 22
+Enter value for dishname: TANDOORI CHICKEN(HALF)
+Enter value for cost: 243
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(22,'TANDOORI CHICKEN(HALF)',243)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 23
+Enter value for dishname:  TANDOORI CHICKEN(FULL)
+Enter value for cost: 379
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(23,' TANDOORI CHICKEN(FULL)',379)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 24
+Enter value for dishname: CHICKEN RESHMI KEBAB
+Enter value for cost: 243
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(24,'CHICKEN RESHMI KEBAB',243)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 25
+Enter value for dishname: CHICKEN GARLIC KEBAB
+Enter value for cost: 243
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(25,'CHICKEN GARLIC KEBAB',243)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 26
+Enter value for dishname: BUTTER CHICKEN BONELESS
+Enter value for cost: 246
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(26,'BUTTER CHICKEN BONELESS',246)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 27
+Enter value for dishname: NIZAMI HANDI
+Enter value for cost: 171
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(27,'NIZAMI HANDI',171)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 28
+Enter value for dishname: TANDOORI ROTI
+Enter value for cost: 40
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(28,'TANDOORI ROTI',40)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: RUMALI ROTI
+Enter value for dishname:
+Enter value for cost:
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(RUMALI ROTI,'',)
+INSERT INTO ITEM_DETAILS VALUES(RUMALI ROTI,'',)
+                                       *
+ERROR at line 1:
+ORA-00917: missing comma
+
+
+SQL> /
+Enter value for id: 29
+Enter value for dishname: RUMALI ROTI
+Enter value for cost: 40
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(29,'RUMALI ROTI',40)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for id: 30
+Enter value for dishname: WATER BOTTLE
+Enter value for cost: 20
+old   1: INSERT INTO ITEM_DETAILS VALUES(&ID,'&DISHNAME',&COST)
+new   1: INSERT INTO ITEM_DETAILS VALUES(30,'WATER BOTTLE',20)
+
+1 row created.
+
+Commit complete.
+SQL> SELECT *FROM ITEM_DETATLS;
+SELECT *FROM ITEM_DETATLS
+             *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> SELECT *FROM ITEM_DETAILS;
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+         1 CHICKEN BIRYANI                                           210
+         2 MUTTON BIRYANI                                            253
+         3 CHICKEN FAMILY PACK                                       552
+         4 MUTTON FAMILY PACK                                        576
+         5 SPECIAL CHICKEN BIRYANI                                   337
+         6 SPECIAL MUTTON BIRYANI                                    351
+         7 SUPREME CHICKEN BIRYANI                                   784
+         8 SUPREME MUTTON BIRYANI                                    819
+         9 EGG BIRYANI                                               154
+        10 VEG BIRYANI                                               154
+        11 MUTTON THALI                                              355
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+        12 CHICKEN THALI                                             283
+        13 VEG TAHLI                                                 212
+        14 VEG FAMILY PACK                                           383
+        15 VEG SUPREME PACK                                          574
+        16 CHILLY CHICKEN                                            264
+        17 CHICKEN 65                                                264
+        18 PEPPER CHICKEN                                            264
+        19 PANNER 65                                                 196
+        20 VEG MANCHURIAN                                            189
+        21 CHICKEN TIKKA KEBAB                                       243
+        22 TANDOORI CHICKEN(HALF)                                    243
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+        23  TANDOORI CHICKEN(FULL)                                   379
+        24 CHICKEN RESHMI KEBAB                                      243
+        25 CHICKEN GARLIC KEBAB                                      243
+        26 BUTTER CHICKEN BONELESS                                   246
+        27 NIZAMI HANDI                                              171
+        28 TANDOORI ROTI                                              40
+        29 RUMALI ROTI                                                40
+        30 WATER BOTTLE                                               20
+
+30 rows selected.
+
+SQL> INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&CID,'&DISHNAME',&QUANTITY);
+Enter value for cid: 2001
+Enter value for dishname: MUTTON BIRYANI
+Enter value for quantity: 6
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(2001,'MUTTON BIRYANI',6)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for cid: 2001
+Enter value for dishname: CHILLI CHICKEN
+Enter value for quantity: 3
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(2001,'CHILLI CHICKEN',3)
+INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(2001,'CHILLI CHICKEN',3)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007497) violated
+
+
+SQL> DESC CUSTOMER_ITEM_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ DISHNAME                                  NOT NULL VARCHAR2(50)
+ QUANTITY                                           NUMBER(38)
+
+SQL> DROP TABLE CUSTOMER_ITEM_DETAILS;
+
+Table dropped.
+
+SQL> CREATE TABLE CUSTOMER_ITEM_DETAILS
+  2   ( IDNO INT,
+  3     CID NUMBER(4),
+  4     ITEMNAME VARCHAR2(50) NOT NULL,
+  5     QUANTITY INT ,
+  6     PRIMARY KEY(IDNO));
+
+Table created.
+
+SQL> ALTER TABLE CUSTOMER_ITEM_DETAILS RENAME COLUMN ITEMNAME TO DISHNAME;
+
+Table altered.
+
+SQL> INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY);
+Enter value for idno: 1
+Enter value for cid: 2001
+Enter value for dishname: MUTTON BIRYANI
+Enter value for quantity: 6
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(1,2001,'MUTTON BIRYANI',6)
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 2
+Enter value for cid: 2001
+Enter value for dishname: CHIILI CHICKEN
+Enter value for quantity: 3
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(2,2001,'CHIILI CHICKEN',3)
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 3
+Enter value for cid: 2001
+Enter value for dishname: CHICKEN GARLIC KEBAB
+Enter value for quantity: 3
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(3,2001,'CHICKEN GARLIC KEBAB',3)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 4
+Enter value for cid:
+Enter value for dishname:
+Enter value for quantity:
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(4,,'',)
+INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(4,,'',)
+                                           *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> /
+Enter value for idno: 5
+Enter value for cid: 2002
+Enter value for dishname: PANNER 65
+Enter value for quantity: 2
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(5,2002,'PANNER 65',2)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 6
+Enter value for cid: 2002
+Enter value for dishname: NIZAMI HANDI
+Enter value for quantity: 2
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(6,2002,'NIZAMI HANDI',2)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 7
+Enter value for cid: 2002
+Enter value for dishname: RUMALI ROTI
+Enter value for quantity: 4
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(7,2002,'RUMALI ROTI',4)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 8
+Enter value for cid: 2003
+Enter value for dishname: VEG FAMILY PACK
+Enter value for quantity: 1
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(8,2003,'VEG FAMILY PACK',1)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 9
+Enter value for cid: 2005
+Enter value for dishname: PEPPER CHICKEN
+Enter value for quantity: 3
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(9,2005,'PEPPER CHICKEN ',3)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 10
+Enter value for cid: 2005
+Enter value for dishname: SUPREME CHICKEN BIRYANI
+Enter value for quantity: 3
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(10,2005,'SUPREME CHICKEN BIRYANI',3)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 11
+Enter value for cid: 2008
+Enter value for dishname: TANDOORI CHICKEN(HALF)
+Enter value for quantity: 1
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(11,2008,'TANDOORI CHICKEN(HALF)',1)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 12
+Enter value for cid: 2008
+Enter value for dishname: CHICKEN 65
+Enter value for quantity: 5
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(12,2008,'CHICKEN 65',5)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 13
+Enter value for cid: 2008
+Enter value for dishname: BUTTER CHICKEN BONELESS
+Enter value for quantity: 3
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(13,2008,'BUTTER CHICKEN BONELESS',3)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for idno: 14
+Enter value for cid: 2008
+Enter value for dishname: TANDOORI ROTI
+Enter value for quantity: 8
+old   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(&IDNO,&CID,'&DISHNAME',&QUANTITY)
+new   1: INSERT INTO CUSTOMER_ITEM_DETAILS VALUES(14,2008,'TANDOORI ROTI',8)
+1 row created.
+
+Commit complete.
+SQL> SELECT *FROM CUSTOMER_ITEM_DETAILS;
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         1       2001 MUTTON BIRYANI
+         6
+
+         2       2001 CHIILI CHICKEN
+         3
+
+         3       2001 CHICKEN GARLIC KEBAB
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         5       2002 PANNER 65
+         2
+
+         6       2002 NIZAMI HANDI
+         2
+
+         7       2002 RUMALI ROTI
+         4
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         8       2003 VEG FAMILY PACK
+         1
+
+         9       2005 PEPPER CHICKEN
+         3
+
+        10       2005 SUPREME CHICKEN BIRYANI
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+        11       2008 TANDOORI CHICKEN(HALF)
+         1
+
+        12       2008 CHICKEN 65
+         5
+
+        13       2008 BUTTER CHICKEN BONELESS
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+        14       2008 TANDOORI ROTI
+         8
+
+
+13 rows selected.
+
+SQL> INSERT INTO WAITER_ITEM_DETAILS VALUES(&WID,'&WNAME',&OID,&CID);
+Enter value for wid: 101
+Enter value for wname: MAHESH
+Enter value for oid: 11
+Enter value for cid: 2001
+old   1: INSERT INTO WAITER_ITEM_DETAILS VALUES(&WID,'&WNAME',&OID,&CID)
+new   1: INSERT INTO WAITER_ITEM_DETAILS VALUES(101,'MAHESH',11,2001)
+INSERT INTO WAITER_ITEM_DETAILS VALUES(101,'MAHESH',11,2001)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist
+
+
+SQL> DESC WAITER_ITEM_DETAILS;
+ERROR:
+ORA-04043: object WAITER_ITEM_DETAILS does not exist
+
+
+SQL> DESC WAITER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WID                                       NOT NULL NUMBER(3)
+ WNAME                                              VARCHAR2(50)
+ OID                                                NUMBER(2)
+ CID                                                NUMBER(4)
+
+SQL> INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID);
+Enter value for wid: 101
+Enter value for wname: MAHESH
+Enter value for oid: 1
+Enter value for cid:
+old   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID)
+new   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'MAHESH',1,)
+INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'MAHESH',1,)
+                                                       *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL>
+SQL> /
+Enter value for wid: 101
+Enter value for wname: MAHESH
+Enter value for oid: 11
+Enter value for cid: 2001
+old   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID)
+new   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'MAHESH',11,2001)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for wid: 101
+Enter value for wname: MAHESH
+Enter value for oid: 12
+Enter value for cid:
+old   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID)
+new   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'MAHESH',12,)
+INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'MAHESH',12,)
+                                                        *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> /
+Enter value for wid: 101
+Enter value for wname: MAHESH
+Enter value for oid: 12
+Enter value for cid: 2009
+old   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID)
+new   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'MAHESH',12,2009)
+INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'MAHESH',12,2009)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (SYSTEM.SYS_C007498) violated
+
+
+SQL> ALTER TABLE WAITER_ORDER_DETAILS ADD PRIMARY KEY(CID);
+ALTER TABLE WAITER_ORDER_DETAILS ADD PRIMARY KEY(CID)
+                                     *
+ERROR at line 1:
+ORA-02260: table can have only one primary key
+
+
+SQL> ALTER TABLE WAITER_ORDER_DETAILS DROP COLUMN OID;
+
+Table altered.
+
+SQL> ALTER TABLE WAITER_ORDER_DETAILS DROP COLUMN CID;
+
+Table altered.
+
+SQL> DROP TABLE WAITER_ORDER_DETAILS;
+
+Table dropped.
+
+SQL>
+SQL>  CREATE TABLE WAITER_ORDER_DETAILS
+  2    ( WID NUMBER(3),
+  3     WNAME VARCHAR2(50),
+  4      OID NUMBER(2),
+  5      CID NUMBER(4),
+  6      PRIMARY KEY(WID,CID)
+  7    );
+
+Table created.
+
+SQL> INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID);
+Enter value for wid: 101
+Enter value for wname: NAVIN
+Enter value for oid: 11
+Enter value for cid: 2001
+old   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID)
+new   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'NAVIN',11,2001)
+
+1 row created.
+
+Commit complete.
+SQL> /
+Enter value for wid: 101
+Enter value for wname: NAVIN
+Enter value for oid: 12
+Enter value for cid: 2009
+old   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(&WID,'&WNAME',&OID,&CID)
+new   1: INSERT INTO WAITER_ORDER_DETAILS VALUES(101,'NAVIN',12,2009)
+
+1 row created.
+
+Commit complete.
+SQL>
+
+-------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+TABLES DISPLAY
+
+
+SQL*Plus: Release 11.2.0.2.0 Production on Sun Dec 31 22:39:30 2023
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> CONNECT SYSTEM
+Enter password:
+Connected.
+SQL> SELECT *FROM ITEM_DETAILS;
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+         1 CHICKEN BIRYANI                                           210
+         2 MUTTON BIRYANI                                            253
+         3 CHICKEN FAMILY PACK                                       552
+         4 MUTTON FAMILY PACK                                        576
+         5 SPECIAL CHICKEN BIRYANI                                   337
+         6 SPECIAL MUTTON BIRYANI                                    351
+         7 SUPREME CHICKEN BIRYANI                                   784
+         8 SUPREME MUTTON BIRYANI                                    819
+         9 EGG BIRYANI                                               154
+        10 VEG BIRYANI                                               154
+        11 MUTTON THALI                                              355
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+        12 CHICKEN THALI                                             283
+        13 VEG TAHLI                                                 212
+        14 VEG FAMILY PACK                                           383
+        15 VEG SUPREME PACK                                          574
+        16 CHILLY CHICKEN                                            264
+        17 CHICKEN 65                                                264
+        18 PEPPER CHICKEN                                            264
+        19 PANNER 65                                                 196
+        20 VEG MANCHURIAN                                            189
+        21 CHICKEN TIKKA KEBAB                                       243
+        22 TANDOORI CHICKEN(HALF)                                    243
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+        23  TANDOORI CHICKEN(FULL)                                   379
+        24 CHICKEN RESHMI KEBAB                                      243
+        25 CHICKEN GARLIC KEBAB                                      243
+        26 BUTTER CHICKEN BONELESS                                   246
+        27 NIZAMI HANDI                                              171
+        28 TANDOORI ROTI                                              40
+        29 RUMALI ROTI                                                40
+        30 WATER BOTTLE                                               20
+
+30 rows selected.
+
+SQL> SELECT *FROM CUSTOMER_ORDER_DETAILS;
+
+       CID CNAME                                                     WID
+---------- -------------------------------------------------- ----------
+      2001 ARUN                                                      101
+      2002 PUSHPA                                                    102
+      2003 VIVEK                                                     103
+      2004 SHAILA                                                    104
+      2005 BABU                                                      105
+      2006 CHAYA                                                     102
+      2007 LAKAN                                                     105
+      2008 AMEY                                                      102
+      2009 SHRUTI                                                    101
+      2010 PANKAJ                                                    104
+
+10 rows selected.
+
+SQL> SELECT *FROM CUSTOMER_ITEM_DETAILS;
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         1       2001 MUTTON BIRYANI
+         6
+
+         2       2001 CHIILI CHICKEN
+         3
+
+         3       2001 CHICKEN GARLIC KEBAB
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         5       2002 PANNER 65
+         2
+
+         6       2002 NIZAMI HANDI
+         2
+
+         7       2002 RUMALI ROTI
+         4
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         8       2003 VEG FAMILY PACK
+         1
+
+         9       2005 PEPPER CHICKEN
+         3
+
+        10       2005 SUPREME CHICKEN BIRYANI
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+        11       2008 TANDOORI CHICKEN(HALF)
+         1
+
+        12       2008 CHICKEN 65
+         5
+
+        13       2008 BUTTER CHICKEN BONELESS
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+        14       2008 TANDOORI ROTI
+         8
+
+
+13 rows selected.
+
+SQL> SELECT *FROM WAITER_DETAILS;
+
+       WID WNAME
+---------- --------------------------------------------------
+       101 MAHESH
+       102 GURU
+       103 ADITYA
+       104 HARISH
+       105 SUMAN
+
+SQL> SELECT *FROM CHEF_DETAILS;
+
+      CHID CHNAME
+---------- --------------------------------------------------
+         1 MAHANTESH
+         2 VITTAL
+         3 NAVIN
+         4 BASU
+         5 JANNY
+
+SQL> SELECT *FROM WAITER_ORDER_DETAILS;
+
+       OID        WID       CHID
+---------- ---------- ----------
+        11        101          1
+        12        101          2
+        13        102          3
+        14        102          4
+        15        102          5
+        16        103          1
+        17        104          2
+        18        104          3
+        19        105          4
+        20        105          5
+
+10 rows selected.
+
+SQL> SELECT *FROM ORDER_DETAILS;
+
+       OID        TNO DO
+---------- ---------- ---------
+        11          5 31-DEC-23
+        12          4 31-DEC-23
+        13          1 31-DEC-23
+        14          3 31-DEC-23
+        15          2 01-JAN-24
+        16          6 01-JAN-24
+        17          4 03-JAN-24
+        18          9 04-JAN-24
+        19          1 04-JAN-24
+        20          2
+
+10 rows selected.
+
+SQL>
+---------------------------------------------------------------------------
+---------------------------------------------------------------------------
+QUERIES----
+
+
+
+
+SQL*Plus: Release 11.2.0.2.0 Production on Mon Jan 1 11:12:24 2024
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect system
+Enter password:
+Connected.
+SQL> SELECT *FROM CUSTOMER_ORDER_DETAILS WHERE MOD(CID,2)=0;
+
+       CID CNAME                                                     WID
+---------- -------------------------------------------------- ----------
+      2002 PUSHPA                                                    102
+      2004 SHAILA                                                    104
+      2006 CHAYA                                                     102
+      2008 AMEY                                                      102
+      2010 PANKAJ                                                    104
+
+SQL> SELECT COUNT(CID) FROM CUSTOMER_ITEM_DETAILS WHERE DISHNAME='MUTTON BIRYANI';
+
+COUNT(CID)
+----------
+         1
+
+SQL> SELECT DISHNAME,MAX(COST) FROM ITEM_DETAILS;
+SELECT DISHNAME,MAX(COST) FROM ITEM_DETAILS
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function
+
+
+SQL> SELECT MAX(COST) FROM ITEM_DETAILS;
+
+ MAX(COST)
+----------
+       819
+
+SQL> SELECT OID FROM ORDER_DETAILS WHERE DO BETWEEN '01-JAN-2024' AND '31-DEC-2024';
+
+       OID
+----------
+        15
+        16
+        17
+        18
+        19
+
+SQL> SELECT OID,TNO FROM ORDER_DETAILS WHERE DO BETWEEN '01-JAN-2024' AND '31-DEC-2024';
+
+       OID        TNO
+---------- ----------
+        15          2
+        16          6
+        17          4
+        18          9
+        19          1
+
+SQL> SELECT *FROM CHEF_DETAILS WHERE CHNAME LIKE '%T';
+
+no rows selected
+
+SQL> SELECT *FROM CHEF_DETAILS WHERE CHNAME LIKE '%T%';
+
+      CHID CHNAME
+---------- --------------------------------------------------
+         1 MAHANTESH
+         2 VITTAL
+
+SQL> SELECT *FROM CUSTOMER_ORDER_DETAILS WHERE CID NOT IN (SELECT CID FROM CUSTOMER_ITEM_DETAILS);
+
+       CID CNAME                                                     WID
+---------- -------------------------------------------------- ----------
+      2006 CHAYA                                                     102
+      2009 SHRUTI                                                    101
+      2010 PANKAJ                                                    104
+      2004 SHAILA                                                    104
+      2007 LAKAN                                                     105
+
+SQL> SELECT *FROM ITEM_DETAILS WHERE COST>(SELECT AVG(COST) FROM ITEM_DETAIL
+S);
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+         3 CHICKEN FAMILY PACK                                       552
+         4 MUTTON FAMILY PACK                                        576
+         5 SPECIAL CHICKEN BIRYANI                                   337
+         6 SPECIAL MUTTON BIRYANI                                    351
+         7 SUPREME CHICKEN BIRYANI                                   784
+         8 SUPREME MUTTON BIRYANI                                    819
+        11 MUTTON THALI                                              355
+        14 VEG FAMILY PACK                                           383
+        15 VEG SUPREME PACK                                          574
+        23  TANDOORI CHICKEN(FULL)                                   379
+
+10 rows selected.
+
+SQL> SELECT WID,COUNT(CID) FROM CUSTOMER_ORDER_DETAILS WHERE GROUP BY WID HA
+VING COUNT(CID)>2;
+SELECT WID,COUNT(CID) FROM CUSTOMER_ORDER_DETAILS WHERE GROUP BY WID HAVING COUNT(CID)>2
+                                                        *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> SELECT WID,COUNT(CID) FROM CUSTOMER_ORDER_DETAILS  GROUP BY WID HAVING COUNT(CID)>2;
+
+       WID COUNT(CID)
+---------- ----------
+       102          3
+
+SQL> SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_
+DETAILS WHERE MOD(OID,2)!=0;
+SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE MOD(OID,2)!=0
+
+                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE NOT MOD(OID,2)=0;
+SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE NOT MOD(OID,2)=0
+
+                        *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE  MOD(OID,2)=0;
+SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE  MOD(OID,2)=0
+
+                     *
+ERROR at line 1:
+ORA-00907: missing right parenthesis
+
+
+SQL> SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE  MOD(OID,2)==0;
+SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE  MOD(OID,2)==0
+
+                     *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> SELECT *FROM CHEF_DETAILS WHERE CHID IN (SELECT CHID FROM WAITER_ORDER_DETAILS WHERE  MOD(OID,2)!=0);
+
+      CHID CHNAME
+---------- --------------------------------------------------
+         1 MAHANTESH
+         2 VITTAL
+         3 NAVIN
+         4 BASU
+         5 JANNY
+
+SQL> SELECT CID,CNAME FROM CUSTOMER_ORDER_DETAILS WHERE CID(SELECT CID FROM
+CUSTOMER_ITEM_DETAILS WHERE QUANTITY>4);
+SELECT CID,CNAME FROM CUSTOMER_ORDER_DETAILS WHERE CID(SELECT CID FROM CUSTOMER_ITEM_DETAILS WHERE QUANTITY>4)
+                                                       *
+ERROR at line 1:
+ORA-00936: missing expression
+
+
+SQL> SELECT CID,CNAME FROM CUSTOMER_ORDER_DETAILS WHERE CID IN (SELECT CID FROM CUSTOMER_ITEM_DETAILS WHERE QUANTITY>4);
+
+       CID CNAME
+---------- --------------------------------------------------
+      2001 ARUN
+      2008 AMEY
+
+SQL>
+
+SQL> SELECT SUM(QUANTITY*COST) FROM CUSTOMER_ITEM_DETAILS C JOIN ITEM_DETAILS I ON C.DISHNAME=I.DISHNAME WHERE CID=2001;
+
+SUM(QUANTITY*COST)
+------------------
+              2247
+
+SQL> COMMIT
+  2  ;
+
+Commit complete.
+
+SQL> SELECT W.WID,W.WNAME FROM WAITER_DETAILS W JOIN WAITER_ORDER_DETAILS D ON W.WID=D.WID JOIN ORDER_DETAILS O ON D.OID=O.OID AND O.DO IS NULL;
+
+       WID WNAME
+---------- --------------------------------------------------
+       105 SUMAN
+
+SQL>
+
+
+
+SQL> (SELECT DISHNAME FROM ITEM_DETAILS) MINUS (SELECT DISHNAME FROM CUSTOMER_ITEM_DETAILS);
+
+DISHNAME
+--------------------------------------------------
+ TANDOORI CHICKEN(FULL)
+CHICKEN BIRYANI
+CHICKEN FAMILY PACK
+CHICKEN RESHMI KEBAB
+CHICKEN THALI
+CHICKEN TIKKA KEBAB
+CHILLY CHICKEN
+EGG BIRYANI
+MUTTON FAMILY PACK
+MUTTON THALI
+PEPPER CHICKEN
+
+DISHNAME
+--------------------------------------------------
+SPECIAL CHICKEN BIRYANI
+SPECIAL MUTTON BIRYANI
+SUPREME MUTTON BIRYANI
+VEG BIRYANI
+VEG MANCHURIAN
+VEG SUPREME PACK
+VEG TAHLI
+WATER BOTTLE
+
+19 rows selected.
+
+SQL>
+
+
+
+---------------------------------------------------
+---------------------------------------------------
+
+DETAILS:-
+
+SQL> DESC CUSTOMER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CID                                       NOT NULL NUMBER(4)
+ CNAME                                              VARCHAR2(50)
+ WID                                                NUMBER(3)
+
+SQL> DESC CUSTOMER_ITEM_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IDNO                                      NOT NULL NUMBER(38)
+ CID                                                NUMBER(4)
+ DISHNAME                                  NOT NULL VARCHAR2(50)
+ QUANTITY                                           NUMBER(38)
+
+SQL> DESC WAITER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ WID                                       NOT NULL NUMBER(3)
+ WNAME                                              VARCHAR2(50)
+
+SQL> DESC CHEF_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ CHID                                      NOT NULL NUMBER(1)
+ CHNAME                                             VARCHAR2(50)
+
+SQL> DESC WAITER_ORDER_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ OID                                       NOT NULL NUMBER(2)
+ WID                                                NUMBER(3)
+ CHID                                               NUMBER(1)
+
+SQL> RENAME ITEM_DETAILS TO DISH_DETAILS;
+
+Table renamed.
+
+SQL> RENAME CUSTOMER_ITEM_DETAILS TO CUSTOMER_DISH_DETAILS;
+
+Table renamed.
+
+SQL> DESC CUSTOMER_DISH_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ IDNO                                      NOT NULL NUMBER(38)
+ CID                                                NUMBER(4)
+ DISHNAME                                  NOT NULL VARCHAR2(50)
+ QUANTITY                                           NUMBER(38)
+
+SQL> DESC DISH_DETAILS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                                 NUMBER(38)
+ DISHNAME                                  NOT NULL VARCHAR2(50)
+ COST                                               FLOAT(126)
+
+SQL> SELECT *FROM CUSTOMER_ORDER_DETAILS;
+
+       CID CNAME                                                     WID
+---------- -------------------------------------------------- ----------
+      2001 ARUN                                                      101
+      2002 PUSHPA                                                    102
+      2003 VIVEK                                                     103
+      2004 SHAILA                                                    104
+      2005 BABU                                                      105
+      2006 CHAYA                                                     102
+      2007 LAKAN                                                     105
+      2008 AMEY                                                      102
+      2009 SHRUTI                                                    101
+      2010 PANKAJ                                                    104
+
+10 rows selected.
+
+SQL> SELECT *FROM CUSTOMER_DISH_DETAILS;
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         1       2001 MUTTON BIRYANI
+         6
+
+         2       2001 CHIILI CHICKEN
+         3
+
+         3       2001 CHICKEN GARLIC KEBAB
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         5       2002 PANNER 65
+         2
+
+         6       2002 NIZAMI HANDI
+         2
+
+         7       2002 RUMALI ROTI
+         4
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+         8       2003 VEG FAMILY PACK
+         1
+
+         9       2005 PEPPER CHICKEN
+         3
+
+        10       2005 SUPREME CHICKEN BIRYANI
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+        11       2008 TANDOORI CHICKEN(HALF)
+         1
+
+        12       2008 CHICKEN 65
+         5
+
+        13       2008 BUTTER CHICKEN BONELESS
+         3
+
+
+      IDNO        CID DISHNAME
+---------- ---------- --------------------------------------------------
+  QUANTITY
+----------
+        14       2008 TANDOORI ROTI
+         8
+
+
+13 rows selected.
+
+SQL> SELECT *FROM WAITER_DETAILS;
+
+       WID WNAME
+---------- --------------------------------------------------
+       101 MAHESH
+       102 GURU
+       103 ADITYA
+       104 HARISH
+       105 SUMAN
+
+SQL> SELECT *FROM WAITER_ORDER_DETAILS;
+
+       OID        WID       CHID
+---------- ---------- ----------
+        11        101          1
+        12        101          2
+        13        102          3
+        14        102          4
+        15        102          5
+        16        103          1
+        17        104          2
+        18        104          3
+        19        105          4
+        20        105          5
+
+10 rows selected.
+
+SQL> SELECT *FROM CHEF_DETAILS;
+
+      CHID CHNAME
+---------- --------------------------------------------------
+         1 MAHANTESH
+         2 VITTAL
+         3 NAVIN
+         4 BASU
+         5 JANNY
+
+SQL> SELECT *FROM ORDER_DETAILS;
+
+       OID        TNO DO
+---------- ---------- ---------
+        11          5 31-DEC-23
+        12          4 31-DEC-23
+        13          1 31-DEC-23
+        14          3 31-DEC-23
+        15          2 01-JAN-24
+        16          6 01-JAN-24
+        17          4 03-JAN-24
+        18          9 04-JAN-24
+        19          1 04-JAN-24
+        20          2
+
+10 rows selected.
+
+SQL> SELECT *FROM DISH_DETAILS;
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+         1 CHICKEN BIRYANI                                           210
+         2 MUTTON BIRYANI                                            253
+         3 CHICKEN FAMILY PACK                                       552
+         4 MUTTON FAMILY PACK                                        576
+         5 SPECIAL CHICKEN BIRYANI                                   337
+         6 SPECIAL MUTTON BIRYANI                                    351
+         7 SUPREME CHICKEN BIRYANI                                   784
+         8 SUPREME MUTTON BIRYANI                                    819
+         9 EGG BIRYANI                                               154
+        10 VEG BIRYANI                                               154
+        11 MUTTON THALI                                              355
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+        12 CHICKEN THALI                                             283
+        13 VEG TAHLI                                                 212
+        14 VEG FAMILY PACK                                           383
+        15 VEG SUPREME PACK                                          574
+        16 CHILLY CHICKEN                                            264
+        17 CHICKEN 65                                                264
+        18 PEPPER CHICKEN                                            264
+        19 PANNER 65                                                 196
+        20 VEG MANCHURIAN                                            189
+        21 CHICKEN TIKKA KEBAB                                       243
+        22 TANDOORI CHICKEN(HALF)                                    243
+
+        ID DISHNAME                                                 COST
+---------- -------------------------------------------------- ----------
+        23  TANDOORI CHICKEN(FULL)                                   379
+        24 CHICKEN RESHMI KEBAB                                      243
+        25 CHICKEN GARLIC KEBAB                                      243
+        26 BUTTER CHICKEN BONELESS                                   246
+        27 NIZAMI HANDI                                              171
+        28 TANDOORI ROTI                                              40
+        29 RUMALI ROTI                                                40
+        30 WATER BOTTLE                                               20
+
+30 rows selected.
+
+
